@@ -1,14 +1,18 @@
+import User from "../../models/User.js";
+
 class UserController{
 
-    index(req, res){
-        res.send('Get all users');
+   async index(req, res){
+        const users = await User.find({});
+        res.send(users);
     }
 
     show(req, res){
         res.send('Get a user by id');
     }
 
-    store(req, res){
+    async store(req, res){
+        await User.create({...req.body});
         res.send('Create a user');
     }
 

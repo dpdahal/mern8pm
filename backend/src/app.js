@@ -1,9 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import connectToMongoDb from './config/database.js';
 import webRoute from './route/index.js';
+
 const  app = express();
 dotenv.config();
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+connectToMongoDb();
 
 app.use('/',webRoute);
 
