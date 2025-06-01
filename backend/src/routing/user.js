@@ -6,5 +6,4 @@ let uInstance = new UserController();
 userRoute.get("/",uInstance.index)
 userRoute.post("/",uInstance.store)
 
-
 export default userRoute;

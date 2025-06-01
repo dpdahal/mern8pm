@@ -1,6 +1,9 @@
 import express from 'express';
 import donenv from 'dotenv';
+import Connection from './config/connection.js';
 import webRoute from './routing/web.js';
+
+Connection.connect();
 
 const  app = express();
 donenv.config();

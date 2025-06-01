@@ -1,10 +1,14 @@
+import User from "../models/User.js";
+
 class UserController{
 
     async index(req,res){
-        return res.send("I am users controller")
+        let users = await User.find({});
+        return res.json(users);
     }
      async store(req,res){
-        return res.send("users add")
+        let user = await User.create(req.body);
+        return res.json(user);
     }
 
 }
