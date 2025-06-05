@@ -7,7 +7,11 @@ class UserController{
         return res.json(users);
     }
      async store(req,res){
-        let user = await User.create(req.body);
+        let image ="";
+        if(req.file){
+            image = req.file.filename;
+        }
+        let user = await User.create({...req.body,image: image});
         return res.json(user);
     }
 

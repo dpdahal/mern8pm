@@ -8,6 +8,7 @@ Connection.connect();
 const  app = express();
 donenv.config();
 app.use(express.json());
+app.use(express.static('public'));
 
 app.use("/", webRoute);
 

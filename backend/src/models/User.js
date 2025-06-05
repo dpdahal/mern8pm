@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -26,6 +27,21 @@ const userSchema = new mongoose.Schema({
     image:{
         type: String
     }
+},{
+    versionKey: false,
 });
+
+userSchema.pre("save",async function(next){
+    if(!this.isModified("password")){
+        return next();
+    }
+    this.password = await bcrypt.hash(this.password, 10);
+})
+
+userSchema.methods.toJSON= function() {
+   const uobj = this.toObject();
+   delete uobj.password;
+   return uobj;
+};
 
 export default mongoose.model("User", userSchema);
