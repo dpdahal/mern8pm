@@ -8,5 +8,8 @@ const userFile = fileInstance.files_upload("users");
 
 userRoute.get("/",uInstance.index)
 userRoute.post("/",userFile.single('image'),uInstance.store)
+userRoute.get("/:id",uInstance.show)
+userRoute.put("/:id",userFile.single('image'),uInstance.update)
+userRoute.delete("/:id",uInstance.delete)
 
 export default userRoute;
