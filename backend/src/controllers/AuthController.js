@@ -6,11 +6,11 @@ class AuthController{
         let password = req.body.password;
         let user = await User.findOne({email: email});
         if(!user){
-            return res.status(404).json({message: "User not found"});
+            return res.status(404).json({field:"email",message: "User not found"});
         }else{
             let isMathc = await user.comparePassword(password);
             if(!isMathc){
-                return res.status(401).json({message: "Invalid password"});
+                return res.status(401).json({field:"password",message: "Invalid password"});
             }else{
                 let token = user.generateToken();
                 return res.status(200).json({

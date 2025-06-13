@@ -3,10 +3,13 @@ import "../css/admin.css";
 import { Link, Outlet } from 'react-router-dom'
 
 function AdminMiddleware() {
+  let token = localStorage.getItem("token");
+  if (!token) {
+    window.location.href = "/login";
+  }
   return (
-    <div>
-       <div>
-        
+    <React.Fragment>
+      
         <header id="header" className="header fixed-top d-flex align-items-center">
           <div className="d-flex align-items-center justify-content-between">
             <a href="index.html" className="logo d-flex align-items-center">
@@ -82,101 +85,39 @@ function AdminMiddleware() {
         <aside id="sidebar" className="sidebar">
           <ul className="sidebar-nav" id="sidebar-nav">
             <li className="nav-item">
-              <a className="nav-link " href="index.html">
+              <Link className="nav-link " to="/admin">
                 <i className="bi bi-grid" />
                 <span>Dashboard</span>
-              </a>
+              </Link>
+            </li>
+             <li className="nav-item">
+              <Link className="nav-link " to="/admin/users">
+                <i className="bi bi-people" />
+                <span>Manage Users</span>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i className="bi bi-menu-button-wide" /><span>Components</span><i className="bi bi-chevron-down ms-auto" />
-              </a>
-              <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <Link className="nav-link collapsed" data-bs-target="#news-nav" data-bs-toggle="collapse" to="#">
+                <i className="bi bi-people" /><span>News</span><i className="bi bi-chevron-down ms-auto" />
+              </Link>
+              <ul id="news-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                  <a href="components-alerts.html">
-                    <i className="bi bi-circle" /><span>Alerts</span>
-                  </a>
+                  <Link to="">
+                    <i className="bi bi-circle" /><span>Add News</span>
+                  </Link>
                 </li>
                 <li>
-                  <a href="components-accordion.html">
-                    <i className="bi bi-circle" /><span>Accordion</span>
-                  </a>
+                  <Link to="">
+                    <i className="bi bi-circle" /><span>Show News</span>
+                  </Link>
                 </li>
-                <li>
-                  <a href="components-badges.html">
-                    <i className="bi bi-circle" /><span>Badges</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-breadcrumbs.html">
-                    <i className="bi bi-circle" /><span>Breadcrumbs</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-buttons.html">
-                    <i className="bi bi-circle" /><span>Buttons</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-cards.html">
-                    <i className="bi bi-circle" /><span>Cards</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-carousel.html">
-                    <i className="bi bi-circle" /><span>Carousel</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-list-group.html">
-                    <i className="bi bi-circle" /><span>List group</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-modal.html">
-                    <i className="bi bi-circle" /><span>Modal</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-tabs.html">
-                    <i className="bi bi-circle" /><span>Tabs</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-pagination.html">
-                    <i className="bi bi-circle" /><span>Pagination</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-progress.html">
-                    <i className="bi bi-circle" /><span>Progress</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-spinners.html">
-                    <i className="bi bi-circle" /><span>Spinners</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components-tooltips.html">
-                    <i className="bi bi-circle" /><span>Tooltips</span>
-                  </a>
-                </li>
+                
               </ul>
             </li>
             
           </ul>
         </aside>
         <main id="main" className="main">
-          <div className="pagetitle">
-            <h1>Dashboard</h1>
-            <nav>
-              <ol className="breadcrumb">
-                <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li className="breadcrumb-item active">Dashboard</li>
-              </ol>
-            </nav>
-          </div>
           <section className="section dashboard">
          <div className="row">
             <Outlet />
@@ -192,11 +133,8 @@ function AdminMiddleware() {
           Designed by <Link to="/">MERN</Link>
           </div>
         </footer>
-        <Link href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></Link>
-       
-      </div>
-    
-    </div>
+        <Link to="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></Link>
+    </React.Fragment>
   )
 }
 

@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from '../../layouts/Header'
 
-function HomeComponent() {
+function AboutComponent() {
   return (
     <div className='container'>
-      <Header />
-      HomeComponent</div>
+        <Header />
+        AboutComponent</div>
   )
 }
 
-export default HomeComponent
+export default AboutComponent

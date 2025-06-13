@@ -1,5 +1,6 @@
 import express from 'express';
 import donenv from 'dotenv';
+import cors from 'cors';
 import Connection from './config/connection.js';
 import webRoute from './routing/web.js';
 import DatabaseTableSeeder from './seeder/DatabaseTableSeeder.js';
@@ -9,6 +10,7 @@ Connection.connect();
 const  app = express();
 donenv.config();
 app.use(express.json());
+app.use(cors());
 app.use(express.static('public'));
 
 DatabaseTableSeeder.run();
