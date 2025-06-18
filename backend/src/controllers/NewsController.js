@@ -1,19 +1,31 @@
-import User from "../models/User.js";
+import News from "../models/News.js";
+import TokenVerify from "../middleware/TokenVerify.js";
 
-class UserController {
+class NewsController {
 
     async index(req, res) {
-        let users = await User.find({});
-        return res.json(users);
+        let news = await News.find({});
+        return res.json(news);
     }
     async store(req, res) {
         let image = "";
-        
         if (req.file) {
             image = req.file.filename;
         }
-        let user = await User.create({ ...req.body, image: image });
-        return res.json(user);
+        let token = req.headers.authorization;
+        if (!token) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        let response = TokenVerify.VerifyToken(token.split(" ")[1]);
+        if (!response) {
+            return res.status(401).json({ message: "Invalid token" });
+        }
+        let userId = response.id;
+        if (!userId) {
+            return res.status(401).json({ message: "User ID not found in token" });
+        }
+        let news = await News.create({ ...req.body,authorId: userId, image: image });
+        return res.json(news);
     }
 
     async show(req, res) {
@@ -44,14 +56,14 @@ class UserController {
     
     async delete(req, res) {
         let id = req.params.id;
-        let users = await User.findByIdAndDelete(id);
-        if (!users) {
-            return res.status(404).json({ message: "User not found" });
+        let news = await News.findByIdAndDelete(id);
+        if (!news) {
+            return res.status(404).json({ message: "News not found" });
         } else {
-            return res.json({ message: "User deleted successfully" });
+            return res.json({ message: "News deleted successfully" });
         }
     }
 
 }
 
-export default UserController;
+export default NewsController;

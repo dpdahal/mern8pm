@@ -8,6 +8,7 @@ import LoginComponent from '../auth/LoginComponent';
 import RegisterComponent from '../auth/RegisterComponent';
 import ContactComponent from '../pages/contact/ContactComponent';
 import AboutComponent from '../pages/about/AboutComponent';
+import AddNewsComponent from '../admin/AddNewsComponent';
 
 function RouterComponent() {
   return (
@@ -22,6 +23,8 @@ function RouterComponent() {
         <Route path="/admin" element={<AdminMiddleware />} >
           <Route path="/admin" element={<DashboardComponent />} />
           <Route path="users" element={<UsersComponents />} />
+          <Route path="add-news" element={<AddNewsComponent />} />
+
         </Route>
       </Routes>
 

@@ -117,7 +117,7 @@ function AdminMiddleware() {
                 </Link>
                 <ul id="news-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                   <li>
-                    <Link to="">
+                    <Link to="/admin/add-news">
                       <i className="bi bi-circle" /><span>Add News</span>
                     </Link>
                   </li>
